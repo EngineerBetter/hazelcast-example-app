@@ -31,8 +31,8 @@ public class KeyValueController
 
 
 	@RequestMapping("/{key}")
-	public void get(@PathVariable("key") String key)
+	public String get(@PathVariable("key") String key)
 	{
-		hazelcast.getMap("values").get(key);
+		return (String) hazelcast.getMap("values").get(key);
 	}
 }

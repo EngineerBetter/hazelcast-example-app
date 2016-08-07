@@ -45,5 +45,6 @@ public class SmokeTest
 
 		response = rest.getForEntity("/foo", String.class);
 		assertThat(response.getStatusCode(), is(HttpStatus.OK));
+		assertThat(response.getBody(), is("bar"));
 	}
 }
