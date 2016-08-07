@@ -3,20 +3,23 @@ package com.engineerbetter.hazelcast;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.hazelcast.config.Config;
-import com.hazelcast.config.InterfacesConfig;
-import com.hazelcast.config.NetworkConfig;
+import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.client.config.ClientNetworkConfig;
+import com.hazelcast.core.HazelcastInstance;
 
 @Configuration
 public class HazelcastConfig
 {
 	@Bean
-	public Config getConfig()
+	public ClientConfig getConfig()
 	{
-		return new Config().setNetworkConfig(
-				new NetworkConfig().setInterfaces(
-						new InterfacesConfig().addInterface("10.244.1.2")
-						)
-				);
+		return new ClientConfig().setNetworkConfig(new ClientNetworkConfig().addAddress("10.244.1.2"));
+	}
+
+	@Bean
+	public HazelcastInstance hazelcastInstance(ClientConfig clientConfig)
+	{
+		return HazelcastClient.newHazelcastClient(clientConfig);
 	}
 }
