@@ -10,13 +10,26 @@ import com.hazelcast.client.config.ClientNetworkConfig;
 import com.hazelcast.core.HazelcastInstance;
 
 @Configuration
-@Profile("!cloud")
+@Profile("!cloud-services")
 public class HazelcastConfig
 {
 	@Bean
 	public ClientConfig getConfig()
 	{
-		return new ClientConfig().setNetworkConfig(new ClientNetworkConfig().addAddress("10.244.1.5"));
+		String addresses = System.getenv("ADDRESSES");
+		if(addresses == null)
+		{
+			throw new RuntimeException("ADDRESSES env var required when not using cloud-services profile");
+		}
+
+		ClientNetworkConfig networkConfig = new ClientNetworkConfig();
+
+		for(String address : addresses.split(","))
+		{
+			networkConfig.addAddress(address);
+		}
+
+		return new ClientConfig().setNetworkConfig(networkConfig);
 	}
 
 	@Bean

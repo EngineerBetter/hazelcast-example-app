@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.hazelcast.core.HazelcastInstance;
 
 @Configuration
-@Profile("cloud")
+@Profile("cloud-services")
 public class HazelcastCloudFoundryConfig
 {
 	@Bean

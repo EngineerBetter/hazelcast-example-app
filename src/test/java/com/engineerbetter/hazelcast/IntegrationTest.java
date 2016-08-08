@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=HazelcastExampleApplication.class, webEnvironment=WebEnvironment.RANDOM_PORT)
-public class SmokeTest
+public class IntegrationTest
 {
 	@LocalServerPort
 	private String port;
