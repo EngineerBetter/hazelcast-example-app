@@ -20,8 +20,10 @@ public class HazelcastServiceInfoCreator extends CloudFoundryServiceInfoCreator<
 	{
 		String id = getId(serviceData);
 		Map<String, Object> credentials = getCredentials(serviceData);
-		List<String> ips = (List<String>) credentials.getOrDefault("ips", new LinkedList<String>());
-		return new HazelcastServiceInfo(id, ips.toArray(new String[]{}));
+		List<String> ips = (List<String>) credentials.getOrDefault("members", new LinkedList<String>());
+		String groupName = (String) credentials.getOrDefault("group_name", "");
+		String groupPassword = (String) credentials.getOrDefault("group_pass", "");
+		return new HazelcastServiceInfo(id, groupName, groupPassword, ips.toArray(new String[]{}));
 	}
 
 }

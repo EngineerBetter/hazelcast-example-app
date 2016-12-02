@@ -6,6 +6,7 @@ import org.springframework.cloud.service.ServiceConnectorConfig;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.config.ClientNetworkConfig;
+import com.hazelcast.config.GroupConfig;
 import com.hazelcast.core.HazelcastInstance;
 
 public class HazelcastServiceConnectorCreator extends AbstractServiceConnectorCreator<HazelcastInstance, HazelcastServiceInfo>
@@ -24,6 +25,9 @@ public class HazelcastServiceConnectorCreator extends AbstractServiceConnectorCr
 		networkConfig.setConnectionAttemptLimit(60);
 		networkConfig.setConnectionAttemptPeriod(10000);
 		config.setNetworkConfig(networkConfig);
+
+		GroupConfig groupConfig = new GroupConfig(serviceInfo.groupName, serviceInfo.groupPassword);
+		config.setGroupConfig(groupConfig);
 
 		return HazelcastClient.newHazelcastClient(config);
 	}
