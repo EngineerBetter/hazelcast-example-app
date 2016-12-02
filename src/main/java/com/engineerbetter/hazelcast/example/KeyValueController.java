@@ -1,6 +1,7 @@
 package com.engineerbetter.hazelcast.example;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class KeyValueController
 	}
 
 
-	@RequestMapping(value="/{key}", method=RequestMethod.PUT)
+	@RequestMapping(value="/{key}", method=RequestMethod.PUT, consumes=MediaType.ALL_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void put(@PathVariable("key") String key, @RequestBody String value)
 	{

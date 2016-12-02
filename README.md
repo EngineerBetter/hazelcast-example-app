@@ -13,7 +13,7 @@ cf start hazelcast-example-app
 
 ## Usage
 
-`$ curl -X PUT -d value http://hazelcast-example-app.bosh-lite.com/key`
+`$ curl -X PUT -d value -H "Content-Type: text/plain" http://hazelcast-example-app.bosh-lite.com/key`
 
 `$ curl http://hazelcast-example-app.bosh-lite.com/key`
 
