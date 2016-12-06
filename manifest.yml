@@ -4,3 +4,5 @@ applications:
   path: target/hazelcast-example-app.jar
   env:
     SPRING_PROFILES_ACTIVE: cloud-services
+  services:
+  - hazelcast
